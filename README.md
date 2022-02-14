@@ -61,38 +61,7 @@ created. The Tasks and next_stage for application stages are found as class vari
 and further action by recruiter will be required when the application stage moves to either REJECTED or HIRED.
 
 
-There are three database models used for this game: ```Game```, ```Attempt``` and ```Board```.
-Whenever a user creates a new game, he would necessarily need to provide board characters 
-(for the board layout). Therefore a ```Board``` database entry would be created. As different users
-may provide the same board layout, or not at all (default board used), the same board can be reused
-for subsequent games. ```Board``` has also been kept separate from ```Game``` to allow memoization of
-any words found for that ```Board```, and the expensive word finding engine need not be used as often.
-```BoardData``` class is also used to sanitise any board layout string to ensure that they are in the
-correct format, and they meet the requirements of a ```Board```(ascii letters + *)
+## Deployment
 
-
-For each game created, the board and duration would be saved in ```Game```. The current time would also be saved 
-as start_time. For each game to be considered a valid game (non-expired), the current time will be subtracted against
-start_time and compared with the duration.
-
-Any proper valid moves made by a user will be saved as an ```Attempt``` entry. Any subsequent moves will
-always check all current ```Game``` associated ```Attempt``` entries to ensure that no repeat words can be
-submitted again. Each ```Attempt``` entry also holds the score of each move and thus the total score for
-each game can be obtained by summing all current ```Game``` associated ```Attempt``` entries' score. Upon
-deletion of any ```Game```, all associated ```Attempt``` entries will also be deleted. ```Attempt``` has 
-been kept separate from ```Game``` to allow easy analysis of words and scores for each type of board.
-
-- Word Finding Engine
-
-The word finding engine resides under ```game\models.py``` under method ```Board.is_word_available```. 
-Everytime a word is provided by user, it is checked under the memoized words in the ```Board```, if
-it is not, then proceed to check against the list of words provided, if it is a valid word, then proceed to
-use the expensive method ```Board.is_char_sequence_available```. 
-
-```Board.is_char_sequence_available``` creates a dictionary with each char and the coordinate they belong to. 
-Then create another dictionary ```move_num_w_positions```  with the move number as the keys. For example, if "HOPE" is given, then a dictionary 
-(hash-map) of {0:[], 1:[], 2:[], 3: []} is created. Check the position on 1 character, and place all available positions
-into key 0 of move_num_w_positions. Check the next character and check whether this character is adjacent to any of the 
-last position in key 0. If there is any such character, append both positions in order into key 1. Repeat until all
-the characters in the word have been accounted for. If there is a sequence once the final character is reached, this
-sequence of character is found on the board! 
+The repository is forked into a private repository and the deployment is done on Azure Cloud using the App Service using 
+the App Service's CI/CD pipeline. 
