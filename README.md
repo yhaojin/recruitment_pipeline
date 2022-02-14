@@ -1,7 +1,7 @@
 Recruitment Pipeline
 ==========================================================
 
-Welcome to my game of boggle. This is a REST api endpoint only game.
+Welcome to my interpretation of a recruitment pipeline web application.
 
 ## Installation instructions
 
@@ -26,48 +26,40 @@ To run tests, execute:
 
     $ python manage.py test
 
-## API Endpoints
-CREATING A GAME
-```
-POST /games
-```
-- Parameters:
-  + `duration` (required): the time (in seconds) that specifies the duration of
-    the game
-  + `random` (required): if `true`, then the game will be generated with random
-    board.  Otherwise, it will be generated based on input.
-  + `board` (optional): if `random` is not true, this will be used as the board
-    for new game. If this is not present, new game will get the default board
-    from `game\test_board.txt`
-    
-The logic for this api endpoint can be found in ```CreateGameView``` under ```game\views.py```.
+## Starting up
 
-PLAYING A GAME
-```
-PUT /games/:id
-```
-- Parameters:
-  + `id` (required): The ID of the game
-  + `token` (required): The token for authenticating the game
-  + `word` (required): The word that can be used to play the game
-  
-The logic for this api endpoint can be found in ```PlayGameView``` under ```game\views.py```.
+Before you begin, execute:
 
-RETRIEVING A GAME INFO
-```
-GET /games/:id
-```
+    $ python initial_script.py
 
-- Parameters:
-  + `id` (required): The ID of the game
-  
-The logic for this api endpoint can be found in ```PlayGameView``` under ```game\views.py```.
+This will set up some initial data in your local database.
 
-## Code Logic
+To login as a user, choose either one of the following:
+  - Username: user1, password: password12345
+  - Username: user2, password: password12345
 
-- Database models
+To login as a recruiter, choose either one of the following:
+  - Username: recruiter1, password: password12345
+  - Username: recruiter2, password: password12345
 
-The logic for database models can be found under ```game\models.py```
+
+## Pipeline Logic
+
+The logic for the recruitment pipeline is mainly controlled by three database models: ```Application```, ```Task``` and ```Job```
+
+All ```Application``` instances would necessarily reference a ```Job``` instance. When a job seeker applies for a job,
+an ```Application``` entry is created, along with one ```Task```. A new ```Task``` entry is always created whenever
+a new ```Application``` entry is created, or the stage of an ```Application``` entry is altered. This will ensure that
+the recruiter will keep track of what he needs to do before proceeding to move the application to the next stage. Also,
+upon applying for a new job, the ```Application``` entry will not have any recruiter tagged to it, but will be flagged out
+on the dashboard for all recruiters to take over the case as soon as possible.
+
+Whenever a recruiter wants to move the application to the next stage, he will be forced to complete all existing tasks,
+before the application stage can be changed. This is controlled both in the frontend and backend. As mentioned in the
+previous paragraph, whenever a recruiter moves the application to the next stage, a new ```Task``` entry will be automatically
+created. The Tasks and next_stage for application stages are found as class variables in ```Application```. No more tasks
+and further action by recruiter will be required when the application stage moves to either REJECTED or HIRED.
+
 
 There are three database models used for this game: ```Game```, ```Attempt``` and ```Board```.
 Whenever a user creates a new game, he would necessarily need to provide board characters 

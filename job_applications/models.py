@@ -90,6 +90,7 @@ class Application(models.Model):
         ADVANCED_INTERVIEWING: [REJECTED, OFFERED],
         OFFERED: [HIRED, REJECTED],
         REJECTED: [],
+        HIRED: []
     }
 
     STAGE_TO_TASKS = {

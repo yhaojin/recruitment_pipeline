@@ -134,30 +134,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-if DEBUG:
 
-    STATIC_URL = '/static/'
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-    MEDIA_LOCATION = "media"
-
-    # todo: comment out these this if you want to upload onto digitalocean
-    MEDIA_URL = '/media/'
-
-    # todo: uncomment this if you want to upload onto digitalocean
-    # STATICFILES_STORAGE = 'custom_storage.custom_aws.StaticStorage'  # comment this out when you want to save files to system
-    # DEFAULT_FILE_STORAGE = 'custom_storage.custom_aws.MediaStorage'  # comment this out when you want to save files to system
-    # STATIC_ROOT = f'{AWS_S3_ENDPOINT_URL}/staticfiles/'
-    # MEDIA_URL = f'{AWS_S3_ENDPOINT_URL}/mediafiles/'
-
-else:
-    STATICFILES_STORAGE = 'custom_storage.custom_aws.StaticStorage'  # comment this out when you want to save files to system
-    DEFAULT_FILE_STORAGE = 'custom_storage.custom_aws.MediaStorage'  # comment this out when you want to save files to system
-    # STATIC_ROOT = f'{AWS_S3_ENDPOINT_URL}/staticfiles/'
-    # MEDIA_URL = f'{AWS_S3_ENDPOINT_URL}/mediafiles/'
-
-
-
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_LOCATION = "media"
+MEDIA_URL = '/media/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

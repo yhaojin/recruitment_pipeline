@@ -220,10 +220,12 @@
                                 Hired
                             {% endif %}
                         </label>
-                    <button {% if tasks %} disabled {% endif %}>Save changes</button>
                     {% empty %}
                         <div>No action for now.</div>
                     {% endfor %}
+                    {% if next_stages %}
+                    <button {% if tasks %} disabled {% endif %}>Save changes</button>
+                    {% endif %}
                 </form>
             {% endif %}
         {% else %}
