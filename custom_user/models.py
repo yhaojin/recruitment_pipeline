@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, UserManager
-from typing import Optional, Tuple
 
 
 class CustomUserManager(UserManager):
@@ -44,21 +43,3 @@ class NotificationManager(models.Manager):
             return self.get(**kwargs)
         except Notification.DoesNotExist:
             return None
-
-
-class Notification(models.Model):
-
-    objects = NotificationManager()
-
-    user = models.ForeignKey('custom_user.User', on_delete=models.CASCADE, null=False, blank=False)
-    viewed = models.BooleanField(default=False)
-    job = models.ForeignKey('job_applications.Job', on_delete=models.CASCADE, null=True, blank=True)
-    description = models.TextField(blank=True, null=True)
-    created = models.DateTimeField(auto_now_add=True)
-    modified = models.DateTimeField(auto_now=True)
-
-    def __repr__(self):
-        return self.__str__()
-
-    def __str__(self):
-        return f"<Notification Username: {self.user.username} / Viewed: {self.viewed} / Description: {self.description}>"

@@ -1,46 +1,27 @@
-from django.shortcuts import render
-from django.views.generic import TemplateView, FormView, View
+from django.http import HttpResponse
+from django.views.generic import TemplateView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.db.models import Q
+from django.shortcuts import redirect
 
 from .forms import ApplicationForm
 
 from job_applications.models import Job, Application
 
-# Create your views here.
+import os
+import magic
 
 
-class JobsIndexView(LoginRequiredMixin, FormView):
+class JobsIndexView(LoginRequiredMixin, TemplateView):
     """
     Default view of the portal page, which is the page after a user successfully signs in.
     Page should show all jobs available as well as jobs applied for.
     """
 
     template_name = 'portal/jobs_main.html'
-    form_class = ApplicationForm
     login_url = reverse_lazy('account_login')
     success_url = reverse_lazy('jobs_portal')
-
-    def get_form_kwargs(self):
-
-        kwargs = super(JobsIndexView, self).get_form_kwargs()
-        kwargs.update({'user': self.request.user})
-        return kwargs
-
-    def form_valid(self, form):
-
-        form.instance.user = self.request.user
-
-        form.instance.email = self.request.POST.get("email")
-
-        job = Job.objects.get(pk=self.request.POST.get("job"))
-        form.instance.job = job
-        form.instance.stage = Application.PENDING
-
-        form.save(commit=True)
-
-        return super(JobsIndexView, self).form_valid(form)
 
     def get_context_data(self, **kwargs):
 

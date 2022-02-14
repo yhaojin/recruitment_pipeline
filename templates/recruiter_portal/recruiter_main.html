@@ -4,6 +4,7 @@
 {% load account_tags %}
 {% load i18n %}
 {% load bootstrap %}
+{% load crispy_forms_tags %}
 
 
 {% block body_class %}account account-signup{% endblock %}
@@ -24,6 +25,147 @@
     <div class="container">
 
         <H1>Recruiter Portal Page</H1>
+
+        <H2>Unassigned Applications</H2>
+
+        <table class="table mt-4 text-muted">
+            <thead class="custom-table-font">
+            <th style="width:5%; border-left:0; border-right:0; text-align: left; vertical-align: middle;"
+                scope="col">
+                #
+            </th>
+            <th style="width:30%; border-left:0; border-right:0; text-align: left; vertical-align: middle;"
+                scope="col">
+                Fullname
+            </th>
+            <th style="width:30%; border-left:0; border-right:0; text-align: left; vertical-align: middle;"
+                scope="col">
+                Job ID
+            </th>
+            <th style="width:5%; border-left:0; border-right:0; text-align: left; vertical-align: middle;"
+                scope="col">
+                Status
+            </th>
+            <th style="width:5%; border-left:0; border-right:0; text-align: left; vertical-align: middle;"
+                scope="col">
+            </th>
+            <th style="width:5%; border-left:0; border-right:0; text-align: left; vertical-align: middle;"
+                scope="col">
+            </th>
+            <th style="width:5%; border-left:0; border-right:0; text-align: left; vertical-align: middle;"
+                scope="col">
+            </th>
+            </thead>
+            <tbody class="api-content-font">
+            {% for application in unassigned_applications %}
+                <tr style="height: 5.1rem;">
+                    <td style="border-left:0; border-right:0; text-align: left; vertical-align: middle;">{{ forloop.counter }}</td>
+                    <td style="border-left:0; border-right:0; text-align: left; vertical-align: middle;">{{ application.user.first_name }} {{ application.user.last_name }}</td>
+                    <td style="border-left:0; border-right:0; text-align: left; vertical-align: middle;"><a href="{% url 'job' job_pk=application.job.pk %}">{{ application.job.pk }}</a></td>
+                    <td style="border-left:0; border-right:0; text-align: left; vertical-align: middle;">{{ application.job.description }}</td>
+                    <td style="border-left:0; border-right:0; text-align: left; vertical-align: middle;">
+                        {% if application.stage == 1 %}
+                            Pending
+                        {% elif application.stage == 2 %}
+                            Reviewing
+                        {% elif application.stage == 3 %}
+                            Shortlisted
+                        {% elif application.stage == 4 %}
+                            Interviewing
+                        {% elif application.stage == 5 %}
+                            Advanced Interviewing
+                        {% elif application.stage == 6 %}
+                            Rejected
+                        {% elif application.stage == 7 %}
+                            Offered
+                        {% elif application.stage == 8 %}
+                            Hired
+                        {% endif %}
+                    </td>
+                    <td style="border-left:0; border-right:0; text-align: left; vertical-align: middle;">
+                        <a href="{% url 'job_application' application_pk=application.job.pk %}">
+                            Go to application
+                        </a>
+                    </td>
+                    <td style="border-left:0; border-right:0; text-align: left; vertical-align: middle;">
+                        <a href="{% url 'take_on_application' application_pk=application.job.pk %}">
+                            Take on case
+                        </a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr style="height: 5.1rem;">
+                    <td class="empty-table" colspan="5">
+                        <div>No Unassigned Applications</div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        <H2>Applications assigned to you</H2>
+
+        <table class="table mt-4 text-muted">
+            <thead class="custom-table-font">
+            <th style="width:5%; border-left:0; border-right:0; text-align: left; vertical-align: middle;"
+                scope="col">
+                #
+            </th>
+            <th style="width:30%; border-left:0; border-right:0; text-align: left; vertical-align: middle;"
+                scope="col">
+                Fullname
+            </th>
+            <th style="width:30%; border-left:0; border-right:0; text-align: left; vertical-align: middle;"
+                scope="col">
+                Job ID
+            </th>
+            <th style="width:5%; border-left:0; border-right:0; text-align: left; vertical-align: middle;"
+                scope="col">
+                Status
+            </th>
+            <th style="width:5%; border-left:0; border-right:0; text-align: left; vertical-align: middle;"
+                scope="col">
+            </th>
+            </thead>
+            <tbody class="api-content-font">
+            {% for application in assigned_applications %}
+                <tr style="height: 5.1rem;">
+                    <td style="border-left:0; border-right:0; text-align: left; vertical-align: middle;">{{ forloop.counter }}</td>
+                    <td style="border-left:0; border-right:0; text-align: left; vertical-align: middle;">{{ application.user.first_name }} {{ application.user.last_name }}</td>
+                    <td style="border-left:0; border-right:0; text-align: left; vertical-align: middle;"><a href="{% url 'job' job_pk=application.job.pk %}">{{ application.job.pk }}</a></td>
+                    <td style="border-left:0; border-right:0; text-align: left; vertical-align: middle;">{{ application.job.description }}</td>
+                    <td style="border-left:0; border-right:0; text-align: left; vertical-align: middle;">
+                        {% if application.stage == 1 %}
+                            Pending
+                        {% elif application.stage == 2 %}
+                            Reviewing
+                        {% elif application.stage == 3 %}
+                            Shortlisted
+                        {% elif application.stage == 4 %}
+                            Interviewing
+                        {% elif application.stage == 5 %}
+                            Advanced Interviewing
+                        {% elif application.stage == 6 %}
+                            Rejected
+                        {% elif application.stage == 7 %}
+                            Offered
+                        {% elif application.stage == 8 %}
+                            Hired
+                        {% endif %}
+                    </td>
+                    <td style="border-left:0; border-right:0; text-align: left; vertical-align: middle;">
+                        <a href="{% url 'job_application' application_pk=application.job.pk %}">
+                            Go to application
+                        </a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr style="height: 5.1rem;">
+                    <td class="empty-table" colspan="5">
+                        <div>No Assigned Applications</div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
 
     </div>
 

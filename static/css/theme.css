@@ -397,3 +397,38 @@ main {
     color: white !important;
     background-color: var(--main-blue-color)!important;
 }
+
+.custom-table-font {
+    font-size: 0.9rem;
+    color:#606060;
+}
+
+.job-application-div{
+    margin:2%;
+}
+
+#job-application-form-div{
+    min-width: 320px;
+    width: 50%;
+    max-width: 100%;
+    padding-bottom: 0.5rem;
+}
+
+#create-job-div {
+    width: 600px;
+}
+
+#submit-button-div{
+    padding-top: 24px;
+    padding-left: 0px;
+    margin-top: 2.425rem;
+    margin-left: -20px;
+}
+
+#submit-button{
+    width: 80px;
+    color: #495057 !important;
+    border-radius: 5px !important;
+    background: white !important;
+    border: 1px solid #ced4da !important;
+}

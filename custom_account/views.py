@@ -1,5 +1,3 @@
-from django.shortcuts import render
-
 from custom_user.models import User
 from account.views import LoginView
 from account.utils import default_redirect

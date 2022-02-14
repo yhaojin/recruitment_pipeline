@@ -1,6 +1,8 @@
 import secrets
 import string
 import os
+from datetime import datetime, timezone
+from django.utils import timezone as tz
 
 
 def upload_to_file(instance: "Job", file_name: str) -> str:
@@ -41,3 +43,14 @@ def generate_random_string(n: int) -> str:
     """
 
     return "".join(secrets.choice(string.ascii_letters+string.digits) for __ in range(n))
+
+
+def time_now_utc() -> datetime:
+    return datetime.now(timezone.utc)
+
+
+def create_deadline(time: datetime, days: int) -> datetime:
+    """
+    Function that returns a deadline in days from the time given.
+    """
+    return time + tz.timedelta(days=days)

@@ -5,13 +5,13 @@
 
         <a class="navbar-brand"
            {% if user.is_authenticated %}
-                href="{% url 'landing_page' %}"
-           {% else %}
                 {% if user.category == 1 %}
                     href="{% url 'jobs_portal' %}"
                 {% else %}
                     href="{% url 'recruiter_portal' %}"
                 {% endif %}
+           {% else %}
+                href="{% url 'landing_page' %}"
             {% endif %}
            style="font-family: Montserrat" id="to-portal">Portal
         </a>

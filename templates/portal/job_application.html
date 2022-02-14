@@ -1,0 +1,338 @@
+{% extends "site_base.html" %}
+{% load static %}
+
+{% load account_tags %}
+{% load i18n %}
+{% load bootstrap %}
+{% load crispy_forms_tags %}
+
+
+{% block body_class %}account account-signup{% endblock %}
+{% block head_title %}{% trans "Landing Page" %}{% endblock %}
+
+{% block styles %}
+<link href="{% static 'css/theme.css' %}" rel="stylesheet"/>
+<link href="{% static 'css/landingpage.css' %}" rel="stylesheet"/>
+<link href="{% static 'css/portal.css' %}" rel="stylesheet"/>
+
+{% endblock %}
+
+
+{% block body_base %}
+<main>
+    {% block messages %}{% include "_messages.html" %}{% endblock %}
+
+    <div class="container">
+
+        <H1>Application Details</H1>
+
+        <table class="table" style="color: #3b4151;">
+            <tbody>
+            <tr class="no-bottom-border-table-row">
+                <td class="pl-3">
+                    <div>Job Title</div>
+                </td>
+                <td>
+                    <div>{{ job.label }}</div>
+                </td>
+            </tr>
+            <tr class="no-bottom-border-table-row">
+                <td class="pl-3">
+                    <div>Company</div>
+                </td>
+                <td>
+                    <div>{{ job.company.label }}</div>
+                </td>
+            </tr>
+            <tr class="no-bottom-border-table-row">
+                <td class="pl-3">
+                    <div>Job Description</div>
+                </td>
+                <td>
+                    <div>{{ job.description }}</div>
+                </td>
+            </tr>
+            <tr class="no-bottom-border-table-row">
+                <td class="pl-3">
+                    <div>Hiring Manager</div>
+                </td>
+                <td>
+                    <div>{{ job.hiring_contact }}</div>
+                    <div>Contact at: {{ job.hiring_contact_email }}</div>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+
+        {% if recruiter %}
+            {% if application %}
+                <table class="table" style="color: #3b4151;">
+                    <tbody>
+                    <tr class="no-bottom-border-table-row">
+                        <td class="pl-3">
+                            <div>Application Email</div>
+                        </td>
+                        <td>
+                            <div>{{ application.email }}</div>
+                        </td>
+                    </tr>
+                    <tr class="no-bottom-border-table-row">
+                        <td class="pl-3">
+                            <div>Resume</div>
+                        </td>
+                        <td>
+                            <div><a href="{% url 'download_resume' application_pk=application.pk %}">Download Resume</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="no-bottom-border-table-row">
+                        <td class="pl-3">
+                            <div>Applied date</div>
+                        </td>
+                        <td>
+                            <div>{{ application.created |date:"M d, Y" }}</div>
+                        </td>
+                    </tr>
+                    <tr class="no-bottom-border-table-row">
+                        <td class="pl-3">
+                            <div>Application Stage</div>
+                        </td>
+                        <td>
+                            <div>
+                                {% if application.stage == 1 %}
+                                    Pending
+                                {% elif application.stage == 2 %}
+                                    Reviewing
+                                {% elif application.stage == 3 %}
+                                    Shortlisted
+                                {% elif application.stage == 4 %}
+                                    Interviewing
+                                {% elif application.stage == 5 %}
+                                    Advanced Interviewing
+                                {% elif application.stage == 6 %}
+                                    Rejected
+                                {% elif application.stage == 7 %}
+                                    Offered
+                                {% elif application.stage == 8 %}
+                                    Hired
+                                {% endif %}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="no-bottom-border-table-row">
+                        <td class="pl-3">
+                            <div>Assigned Recruiter</div>
+                        </td>
+                        <td>
+                            {% if application.recruiter %}
+                                <div>{{ application.recruiter.first_name }} {{ application.recruiter.last_name }}</div>
+                                <div>Contact at: {{ application.recruiter.email }}</div>
+                            {% else %}
+                                {% if recruiter %}
+                                    <a href="{% url 'take_on_application' application_pk=application.job.pk %}">
+                                        Take on case
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+                <H1>Recruiter Dashboard</H1>
+
+                <H2>Tasks</H2>
+                {% for task in tasks %}
+                    <form action="{% url 'save_task_changes' task_pk=task.pk %}" role="form" method="post">
+                        {% csrf_token %}
+                        <table class="table" style="color: #3b4151;">
+                            <tbody>
+                            <tr class="no-bottom-border-table-row">
+                                <td class="pl-3">
+                                    <div>Description</div>
+                                </td>
+                                <td class="pl-3">
+                                    <div>{{ task.description }}</div>
+                                </td>
+                            </tr>
+                            <tr class="no-bottom-border-table-row">
+                                <td class="pl-3">
+                                    <div>Notes</div>
+                                </td>
+                                <td class="pl-3">
+                                    <div><textarea name="task-notes">{{ task.notes }}</textarea></div>
+                                </td>
+                            </tr>
+                            <tr class="no-bottom-border-table-row">
+                                <td class="pl-3">
+                                    <div>Completed?</div>
+                                </td>
+                                <td class="pl-3">
+                                    <div><input type="checkbox" id="complete-task"
+                                                name="complete-task" value="yes"></div>
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+                        <button>Save changes</button>
+
+                    </form>
+                {% empty %}
+                    <table class="table" style="color: #3b4151;">
+                        <tbody>
+                        <tr class="no-bottom-border-table-row">
+                            <td class="pl-3">
+                                <div>You have no tasks</div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                {% endfor %}
+
+                <form action="{% url 'change_application_stage' application_pk=application.pk %}" role="form"
+                      method="post">
+                    {% csrf_token %}
+                    <H2>Move to next stage</H2>
+                    {% if tasks %}
+                    <div>Unable to move to next stage when there are existing tasks.</div>
+                    {% endif %}
+                    {% for next_stage in next_stages %}
+                        <input type="radio" name="category" id="category-{{ forloop.counter0 }}" value="{{ next_stage }}"
+                            {% if tasks %} disabled {% endif %}>
+                        <label for="category-{{ forloop.counter0 }}" {% if tasks %} style="color: grey" {% endif %}>
+                            {% if next_stage == 1 %}
+                                Pending
+                            {% elif next_stage == 2 %}
+                                Reviewing
+                            {% elif next_stage == 3 %}
+                                Shortlisted
+                            {% elif next_stage == 4 %}
+                                Interviewing
+                            {% elif next_stage == 5 %}
+                                Advanced Interviewing
+                            {% elif next_stage == 6 %}
+                                Rejected
+                            {% elif next_stage == 7 %}
+                                Offered
+                            {% elif next_stage == 8 %}
+                                Hired
+                            {% endif %}
+                        </label>
+                    <button {% if tasks %} disabled {% endif %}>Save changes</button>
+                    {% empty %}
+                        <div>No action for now.</div>
+                    {% endfor %}
+                </form>
+            {% endif %}
+        {% else %}
+            {% if not application %}
+            <H1>Easy Apply</H1>
+            <form method="post" enctype="multipart/form-data" name="file-upload">
+                <div class="job-application-div d-flex justify-content-left">
+                    <div class="w-30 row" id="job-application-form-div">
+                        <div class="col-9">
+                            {% csrf_token %}
+                            {% crispy form %}
+                        </div>
+                        <div class="col-3" id="submit-button-div">
+                            <div class="d-flex justify-content-start">
+                                <button type="submit" class="btn align-center" id="submit-button">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            {% else %}
+                <H1>Your application</H1>
+                <table class="table" style="color: #3b4151;">
+                <tbody>
+                <tr class="no-bottom-border-table-row">
+                    <td class="pl-3">
+                        <div>Application Email</div>
+                    </td>
+                    <td>
+                        <div>{{ application.email }}</div>
+                    </td>
+                </tr>
+                <tr class="no-bottom-border-table-row">
+                    <td class="pl-3">
+                        <div>Resume</div>
+                    </td>
+                    <td>
+                        <div><a href="{% url 'download_resume' application_pk=application.pk %}">Download Resume</a></div>
+                    </td>
+                </tr>
+                <tr class="no-bottom-border-table-row">
+                    <td class="pl-3">
+                        <div>Applied date</div>
+                    </td>
+                    <td>
+                        <div>{{ application.created |date:"M d, Y" }}</div>
+                    </td>
+                </tr>
+                <tr class="no-bottom-border-table-row">
+                    <td class="pl-3">
+                        <div>Application Stage</div>
+                    </td>
+                    <td>
+                        <div>
+                            {% if application.stage == 1 %}
+                                Pending
+                            {% elif application.stage == 2 %}
+                                Reviewing
+                            {% elif application.stage == 3 %}
+                                Shortlisted
+                            {% elif application.stage == 4 %}
+                                Interviewing
+                            {% elif application.stage == 5 %}
+                                Advanced Interviewing
+                            {% elif application.stage == 6 %}
+                                Rejected
+                            {% elif application.stage == 7 %}
+                                Offered
+                            {% elif application.stage == 8 %}
+                                Hired
+                            {% endif %}
+                        </div>
+                    </td>
+                </tr>
+                <tr class="no-bottom-border-table-row">
+                    <td class="pl-3">
+                        <div>Assigned Recruiter</div>
+                    </td>
+                    <td>
+                        {% if application.recruiter %}
+                        <div>{{ application.recruiter.first_name }} {{ application.recruiter.last_name }}</div>
+                        <div>Contact at: {{ application.recruiter.email }}</div>
+                        {% else %}
+                            {% if recruiter %}
+                                Take on case
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+            {% endif %}
+        {% endif %}
+
+
+    
+    </div>
+
+
+</main>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#id_username').focus();
+
+    });
+</script>
+{% endblock %}

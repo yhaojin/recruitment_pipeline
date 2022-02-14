@@ -23,4 +23,5 @@ urlpatterns = [
     path('recruiter/', include('recruiter_portal.urls')),
     path('account/', include('custom_account.urls')),
     path('account/', include('account.urls')),
+    path('job/', include('job_applications.urls')),
 ]

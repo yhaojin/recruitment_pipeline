@@ -95,10 +95,10 @@ for label, description, company_name, hiring_contact, hiring_contact_email, meta
 
 
 users = [
-    ("user1", "first_name_user1", "last_name_2", "user1@example.com", User.JOB_SEEKER, "password12345"),
-    ("user2", "first_name_user2", "last_name_2", "user2@example.com", User.JOB_SEEKER, "password12345"),
-    ("recruiter1", "first_name_recruiter1", "last_name_recruiter1", "recruiter1@example.com", User.RECRUITER, "password12345"),
-    ("recruiter2", "first_name_recruiter2", "last_name_recruiter2", "recruiter2@example.com", User.RECRUITER, "password12345"),
+    ("user1", "David", "Tan", "user1@example.com", User.JOB_SEEKER, "password12345"),
+    ("user2", "Richard", "Soh", "user2@example.com", User.JOB_SEEKER, "password12345"),
+    ("recruiter1", "Samuel", "Lim", "recruiter1@example.com", User.RECRUITER, "password12345"),
+    ("recruiter2", "Aaron", "Tan", "recruiter2@example.com", User.RECRUITER, "password12345"),
 ]
 
 for username, first_name, last_name, email, category, password in users:

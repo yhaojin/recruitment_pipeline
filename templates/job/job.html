@@ -1,0 +1,162 @@
+{% extends "site_base.html" %}
+{% load static %}
+
+{% load account_tags %}
+{% load i18n %}
+{% load bootstrap %}
+{% load crispy_forms_tags %}
+
+
+{% block body_class %}account account-signup{% endblock %}
+{% block head_title %}{% trans "Landing Page" %}{% endblock %}
+
+{% block styles %}
+<link href="{% static 'css/theme.css' %}" rel="stylesheet"/>
+<link href="{% static 'css/landingpage.css' %}" rel="stylesheet"/>
+<link href="{% static 'css/portal.css' %}" rel="stylesheet"/>
+
+{% endblock %}
+
+
+{% block body_base %}
+<main>
+    {% block messages %}{% include "_messages.html" %}{% endblock %}
+
+    <div class="container">
+
+        <H1>Job Details</H1>
+
+        <table class="table" style="color: #3b4151;">
+            <tbody>
+            <tr class="no-bottom-border-table-row">
+                <td class="pl-3">
+                    <div>Job Title</div>
+                </td>
+                <td>
+                    <div>{{ job.label }}</div>
+                </td>
+            </tr>
+            <tr class="no-bottom-border-table-row">
+                <td class="pl-3">
+                    <div>Company</div>
+                </td>
+                <td>
+                    <div>{{ job.company.label }}</div>
+                </td>
+            </tr>
+            <tr class="no-bottom-border-table-row">
+                <td class="pl-3">
+                    <div>Job Description</div>
+                </td>
+                <td>
+                    <div>{{ job.description }}</div>
+                </td>
+            </tr>
+            <tr class="no-bottom-border-table-row">
+                <td class="pl-3">
+                    <div>Hiring Manager</div>
+                </td>
+                <td>
+                    <div>{{ job.hiring_contact }}</div>
+                    <div>Contact at: {{ job.hiring_contact_email }}</div>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+
+        {% if recruiter %}
+
+            <H1>All applications</H1>
+
+        <table class="table mt-4 text-muted">
+            <thead class="custom-table-font">
+            <th style="width:5%; border-left:0; border-right:0; text-align: left; vertical-align: middle;"
+                scope="col">
+                #
+            </th>
+            <th style="width:30%; border-left:0; border-right:0; text-align: left; vertical-align: middle;"
+                scope="col">
+                Fullname
+            </th>
+            <th style="width:5%; border-left:0; border-right:0; text-align: left; vertical-align: middle;"
+                scope="col">
+                Status
+            </th>
+            <th style="width:5%; border-left:0; border-right:0; text-align: left; vertical-align: middle;"
+                scope="col">
+            </th>
+            </thead>
+            <tbody class="api-content-font">
+            {% for application in applications %}
+                <tr style="height: 5.1rem;">
+                    <td style="border-left:0; border-right:0; text-align: left; vertical-align: middle;">{{ forloop.counter }}</td>
+                    <td style="border-left:0; border-right:0; text-align: left; vertical-align: middle;">{{ application.user.first_name }} {{ application.user.last_name }}</td>
+                    <td style="border-left:0; border-right:0; text-align: left; vertical-align: middle;">
+                        {% if application.stage == 1 %}
+                            Pending
+                        {% elif application.stage == 2 %}
+                            Reviewing
+                        {% elif application.stage == 3 %}
+                            Shortlisted
+                        {% elif application.stage == 4 %}
+                            Interviewing
+                        {% elif application.stage == 5 %}
+                            Advanced Interviewing
+                        {% elif application.stage == 6 %}
+                            Rejected
+                        {% elif application.stage == 7 %}
+                            Offered
+                        {% elif application.stage == 8 %}
+                            Hired
+                        {% endif %}
+                    </td>
+                    <td style="border-left:0; border-right:0; text-align: left; vertical-align: middle;">
+                        <a href="{% url 'job_application' application_pk=application.pk %}">
+                            Go to application
+                        </a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr style="height: 5.1rem;">
+                    <td class="empty-table" colspan="5">
+                        <div>No Applications Yet</div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        {% else %}
+            <H1>Easy Apply</H1>
+            <form method="post" enctype="multipart/form-data" name="file-upload">
+                <div class="job-application-div d-flex justify-content-left">
+                    <div class="w-30 row" id="job-application-form-div">
+                        <div class="col-9">
+                            {% csrf_token %}
+                            {% crispy form %}
+                        </div>
+                        <div class="col-3" id="submit-button-div">
+                            <div class="d-flex justify-content-start">
+                                <button type="submit" class="btn align-center" id="submit-button">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        {% endif %}
+    
+    </div>
+
+
+</main>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#id_username').focus();
+
+    });
+</script>
+{% endblock %}

@@ -82,6 +82,44 @@ class Application(models.Model):
     OFFERED = 7
     HIRED = 8
 
+    NEXT_STAGE = {
+        PENDING: [REVIEWING, SHORTLISTED],
+        REVIEWING: [REJECTED],
+        SHORTLISTED: [INTERVIEWING],
+        INTERVIEWING: [ADVANCED_INTERVIEWING, REJECTED, OFFERED],
+        ADVANCED_INTERVIEWING: [REJECTED, OFFERED],
+        OFFERED: [HIRED, REJECTED],
+        REJECTED: [],
+    }
+
+    STAGE_TO_TASKS = {
+        PENDING: {
+            "description": "Checked with hiring manager whether he/she has reviewed the application?",
+            "deadline": 7
+        },
+        REVIEWING: {
+            "description": "Have you waited a few days yet?",
+            "deadline": 7
+        },
+        SHORTLISTED: {
+            "description": "Have you checked with candidate whether he has gone for the interview?",
+            "deadline": 7
+        },
+        INTERVIEWING: {
+            "description": "Have you checked with candidate on the status of his interview?",
+            "deadline": 7
+        },
+        ADVANCED_INTERVIEWING: {
+            "description": "Have you checked with candidate on the status of his advanced interview?",
+            "deadline": 7
+        },
+        OFFERED: {
+            "description": "Have you checked with candidate whether he has taken up the offer?",
+            "deadline": 7
+        }
+
+    }
+
     categories = [
         (PENDING, "Pending"),
         (REVIEWING, "Reviewing"),
@@ -114,5 +152,15 @@ class Application(models.Model):
 
     def __str__(self):
         return f"<Application Username: {self.user.username} / JobId: {self.job.pk} / Stage: {self.stage}>"
+
+    @property
+    def possible_next_stages(self) -> list:
+        """
+        retrieves the possible next stages to for the application to move into
+        """
+
+        return Application.NEXT_STAGE[self.stage]
+
+
 
 
