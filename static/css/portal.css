@@ -1,0 +1,171 @@
+:root {
+  --general: #004e64;
+  --generallight: #eee;
+  --bordergrey: #ced4da;
+}
+
+.add-form-div {
+    border-width: 1px;
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    box-shadow: 0 0 2px rgba(0, 0, 0, 0.19);
+    margin-bottom: 2%;
+    margin-top: 2%;
+}
+
+
+.green-collapsible {
+    border-radius: 8px;
+    background: rgba(73, 222, 181, 0.1);
+    border: solid #49DEB5;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.19);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+    color: #3b4151;
+}
+
+
+.blue-collapsible {
+    border-radius: 8px;
+    background: rgba(73, 177, 222, 0.1);
+    border: solid #49b1de;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.19);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem;
+    font-size: 1rem;
+    color: #3b4151;
+}
+
+
+.api-action-card{
+    width: 100px;
+    border-radius: 8px;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    color: white;
+    font-family: Sans-serif;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.19);
+    min-width: 100px !important;
+    max-width: 100px !important;
+    height: 30px;
+    padding-top: 3px;
+}
+
+.green-card-background {
+    background: #49DEB5;
+}
+
+.blue-card-background {
+    background: #49b1de;
+}
+
+
+.api-bar-button {
+    padding: 0 !important;
+    border: None !important;
+}
+
+.api-bar-button:focus {
+    outline: 0 !important;
+    box-shadow: none !important;
+}
+
+.cash-account-edit-button {
+    position: relative;
+    float: right;
+}
+
+.book-table {
+    color: #323130 !important;
+}
+
+.portfolio-table {
+    color: #323130 !important;
+}
+
+#left-sidebar {
+    background-color: white !important;
+}
+
+
+@media only screen and (max-width: 600px)  {
+
+    #left-sidebar {
+        display: none;
+    }
+
+}
+
+
+
+#left-sidebar a{
+    color: #212529 !important;
+}
+
+#left-sidebar div{
+    color: #212529 !important;
+}
+
+#left-sidebar hr{
+    margin-top: 0.1rem;
+    margin-bottom: 0.1rem;
+    margin-left: 1.5rem;
+    margin-right: 1.5rem;
+}
+
+.left-sidebar-title {
+    margin-top: 1rem;
+    font-weight: 500;
+}
+
+#left-sidebar li{
+    padding-bottom: 3px;
+    padding-top: 3px;
+}
+
+#left-sidebar li:hover{
+    background-color: lightgrey;
+}
+
+.pf-inner-navbar-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: white !important;
+    height: 1.6rem;
+    font-size: 0.9rem !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-bottom: 0.2rem;
+    vertical-align: middle;
+    border-radius: 1px !important;
+}
+
+.pf-inner-navbar-btn:hover {
+    background-color: lightgrey !important;
+}
+
+.book-inner-navbar-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: white !important;
+    height: 1.6rem;
+    font-size: 0.9rem !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-bottom: 0.2rem;
+    vertical-align: middle;
+    border-radius: 1px !important;
+}
+
+.book-inner-navbar-btn:hover {
+    background-color: lightgrey !important;
+}
+
+

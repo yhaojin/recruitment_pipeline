@@ -1,0 +1,42 @@
+{% extends "site_base.html" %}
+{% load static %}
+
+{% load account_tags %}
+{% load i18n %}
+{% load bootstrap %}
+
+
+{% block body_class %}account account-signup{% endblock %}
+{% block head_title %}{% trans "Landing Page" %}{% endblock %}
+
+{% block styles %}
+<link href="{% static 'css/theme.css' %}" rel="stylesheet"/>
+<link href="{% static 'css/landingpage.css' %}" rel="stylesheet"/>
+<link href="{% static 'css/portal.css' %}" rel="stylesheet"/>
+
+{% endblock %}
+
+
+{% block body_base %}
+<main>
+    {% block messages %}{% include "_messages.html" %}{% endblock %}
+
+    <div class="container">
+
+        <H1>Recruiter Portal Page</H1>
+
+    </div>
+
+
+</main>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#id_username').focus();
+
+    });
+</script>
+{% endblock %}

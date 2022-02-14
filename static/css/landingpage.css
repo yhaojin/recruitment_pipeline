@@ -1,0 +1,340 @@
+main {
+    margin-top: 0px;
+}
+
+img {
+    max-width: 100%;
+}
+
+.a-class {
+    color: #212529 !important;
+    text-decoration: none !important;
+}
+
+.a-class:hover {
+    text-decoration: underline !important;
+}
+
+
+.asteriskField {
+    display: none;
+}
+
+.blue-background {
+    background-color: #00A5CF;
+}
+
+.centering {
+    margin: auto !important;
+}
+
+.text-centering {
+    text-align: center;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.content-display-inline {
+    display: inline;
+}
+
+.landing-page-div {
+    text-align: center;
+    max-width: 850px;
+}
+
+#landing-page-title-buttons-div {
+    max-width: 750px;
+    padding-top: 16vh;
+}
+
+.landing-page-title-buttons {
+    width: 100%;
+}
+
+.white-font {
+    color: white;
+}
+
+.hr-div {
+    margin-top: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.hr-section-divisor {
+    width:200px;
+    margin:auto;
+    height: 3px;
+}
+
+#first-box {
+    padding-top: 10.5rem;
+    padding-bottom: 10.5rem;
+}
+
+#floating-box {
+    position: relative;
+    top: -4.5rem;
+    width: 40%;
+    background-color: #fdf9f3;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    border-radius: 15px;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+}
+
+.emphasis-text {
+    color: #194BCF;
+    font-weight: 900;
+}
+
+.section-partition-cream {
+    min-height: 95vh;
+    background: #fdf9f3;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    padding-top: 200px;
+    padding-bottom: 200px;
+    text-align: center;
+}
+
+.section-partition-white {
+    min-height: 95vh;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    padding-top: 200px;
+    padding-bottom: 200px;
+    text-align: center;
+}
+
+#second-section {
+    padding-top: 2rem;
+    padding-bottom: 0rem;
+}
+
+.second-background {
+    background-color: blue;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.how-does-it-work-img {
+    max-height: 10rem;
+    max-width: 100%;
+}
+.how-does-it-work-subtitle {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.two-img {
+    height: 19rem;
+    max-width: 100%;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+}
+
+.three-col-text {
+    padding-right: 1.7% !important;
+    padding-left: 1.7% !important;
+}
+
+.three-imgs {
+    width: 80%;
+    box-shadow: 2px 2px 5px #ccc;
+}
+
+.section-title {
+    text-align: center;
+}
+
+.group1-button {
+    background: #7AE582 !important;
+    width: 30%;
+    margin-left: 1%;
+    margin-right: 1%;
+    border-radius: 15px !important;
+}
+
+.group1-button:hover {
+    background: #9FFFCB !important;
+    border-color: #00A5CF !important;
+}
+
+.group2-button {
+    background: #00A5CF !important;
+    width: 150px;
+    margin-left: 0%;
+    margin-right: 2%;
+    margin-top: 1%;
+    color: white !important;
+    border-color: #00A5CF !important;
+    border-radius: 15px !important;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+}
+
+.group2-button:hover {
+    background: #25A18E !important;
+    border-color: #25A18E !important;
+}
+
+.group2-button-inverse {
+    background: white !important;
+    width: 150px;
+    margin-left: 0%;
+    margin-right: 2%;
+    margin-top: 1%;
+    color: #00A5CF !important;
+    border-radius: 15px !important;
+    border-color: #00A5CF !important;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.group2-button-inverse:hover {
+    background: #25A18E !important;
+    border-color: #25A18E !important;
+    color: white !important;
+}
+
+
+
+.greyed-button {
+    background: #d3d3d3 !important;
+    width: 30%;
+    margin-left: 0%;
+    margin-right: 2%;
+    margin-top: 1%;
+    color: white !important;
+    pointer-events: none !important;
+    border-radius: 15px !important;
+}
+
+.group3-button {
+    background: #004E64 !important;
+    width: 30%;
+    margin-left: 1%;
+    margin-right: 1%;
+    color: white !important;
+    border-radius: 15px !important;
+}
+
+.group3-button:hover {
+    background: #00A5CF !important;
+    border-color: #00A5CF !important;
+}
+
+.account-credit-div {
+    border-style: none;
+    border-color: #d3d3d3 !important;
+    border-radius: 50px;
+    background-color: #d3d3d3;
+    box-shadow: 5px 5px 5px 5px #d3d3d3;
+}
+
+.group4-button-inverse {
+    background: white !important;
+    width: 30%;
+    margin-left: 1%;
+    margin-right: 1%;
+    color: #25a18e !important;
+    border-radius: 15px !important;
+    border-color: #25a18e !important;
+}
+
+.group3-button-inverse {
+    background: white !important;
+    width: 30%;
+    margin-left: 1%;
+    margin-right: 1%;
+    color: #004E64 !important;
+    border-radius: 15px !important;
+    border-color: #004E64 !important;
+}
+
+.group2-button-round-inverse {
+
+    margin-left: 2px;
+    margin-right: 2px;
+    padding: 0%;
+    background: white !important;
+    color: #00A5CF !important;
+    border-radius: 50% !important;
+    border-color: #00A5CF !important;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+}
+
+.group2-button-round-inverse:hover {
+    background: #25A18E !important;
+    border-color: #25A18E !important;
+    color: white !important;
+}
+
+.group2-button-round {
+
+    padding: 0%;
+    background: #00A5CF !important;
+    color: white !important;
+    border-radius: 50% !important;
+    border-color: #00A5CF !important;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+
+}
+.group2-button-round:hover {
+    background: #25A18E !important;
+    border-color: #25A18E !important;
+    color: white !important;
+}
+
+.greyed-button-round {
+    pointer-events: none;
+    cursor: default;
+    padding: 0%;
+    background: #d3d3d3 !important;
+    color: white !important;
+    border-radius: 50% !important;
+    border-color: #d3d3d3 !important;
+
+}
+
+.product-card {
+    background: #fdf9f3;
+    border-radius: 10px !important;
+    margin: auto;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.19);
+    width: 18rem !important;
+}
+
+.product-card-title-div {
+    padding-top: 10%;
+    padding-left: 10%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.product-card-button-div {
+    margin-left: 6%;
+    margin-right: 6%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+.product-card-text-div {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 15%;
+    margin-bottom: 5%;
+}
+
+.landing-page-p {
+    font-size: 1.75rem !important;
+}
+
+.landing-page-p-2 {
+    font-size: 1.25rem !important;
+}

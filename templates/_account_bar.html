@@ -1,0 +1,57 @@
+{% load account_tags %}
+
+<nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container nav-bar-container">
+
+        <a class="navbar-brand"
+           {% if user.is_authenticated %}
+                href="{% url 'landing_page' %}"
+           {% else %}
+                {% if user.category == 1 %}
+                    href="{% url 'jobs_portal' %}"
+                {% else %}
+                    href="{% url 'recruiter_portal' %}"
+                {% endif %}
+            {% endif %}
+           style="font-family: Montserrat" id="to-portal">Portal
+        </a>
+
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+            {% if user.is_authenticated %}
+                <ul class="navbar-nav ml-auto navbar-right">
+                    <li class="nav-item dropdown">
+
+                        <a class="nav-link dropdown-toggle" href="#" id="userMenu" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <i class="far fa-user"></i>
+                            {% user_display request.user %}
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right custom-header-dropdown" aria-labelledby="userMenu">
+                            <a class="dropdown-item custom-header-dropdown-items" href="{% url 'account_settings' %}">Account Settings</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item custom-header-dropdown-items" href="{% url 'account_logout' %}">Log Out</a>
+                        </div>
+
+                    </li>
+                </ul>
+            {% else %}
+                <ul class="navbar-nav ml-auto navbar-right">
+                    <li class="nav-item"><a href="{% url 'account_login' %}" class="nav-link" id="login-item">Log
+                        In</a></li>
+                    <li class="nav-item"><a href="{% url 'account_signup' %}" class="nav-link" id="signup-item">Sign
+                        up</a></li>
+                </ul>
+            {% endif %}
+
+        </div>
+
+    </div>
+</nav>

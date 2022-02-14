@@ -1,0 +1,59 @@
+{% extends "site_base.html" %}
+{% load static %}
+
+{% load account_tags %}
+{% load i18n %}
+{% load bootstrap %}
+{% load crispy_forms_tags %}
+
+
+{% block body_class %}account account-signup{% endblock %}
+{% block head_title %}{% trans "Landing Page" %}{% endblock %}
+
+{% block styles %}
+<link href="{% static 'css/theme.css' %}" rel="stylesheet"/>
+<link href="{% static 'css/landingpage.css' %}" rel="stylesheet"/>
+<link href="{% static 'css/portal.css' %}" rel="stylesheet"/>
+
+{% endblock %}
+
+
+{% block body_base %}
+<main>
+    {% block messages %}{% include "_messages.html" %}{% endblock %}
+
+    <div class="container">
+
+        <H1>Portal Page</H1>
+
+        <form method="post" enctype="multipart/form-data" name="job-application">
+            <div class="portal-table-div d-flex justify-content-left">
+                <div class="w-30 row" id="portal-form-div">
+                    <div class="col-9">
+                        <div class="create-job-font" id="create-job-div">Create a Job</div>
+                        {% csrf_token %}
+                        {% crispy form %}
+                    </div>
+                    <div class="col-3" id="upload-file-button-div">
+                        <div class="d-flex justify-content-start">
+                            <button type="submit" class="btn align-center" id="upload-file-button">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+</main>
+{% endblock %}
+
+{% block scripts %}
+{{ block.super }}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#id_username').focus();
+
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "site_base.html" %}
+{% load static %}
+
+{% load account_tags %}
+{% load i18n %}
+{% load bootstrap %}
+
+{% block styles %}
+<link href="{% static 'css/app.css' %}" rel="stylesheet"/>
+<link href="{% static 'css/theme.css' %}" rel="stylesheet"/>
+<link href="{% static 'css/landingpage.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block body_base %}
+    <section>
+        <div class="container align-middle text-center" id="first-box" style="margin-bottom: 17rem; margin-top: 3rem;">
+
+            <h2 class="display-4" style="margin-bottom: 1.5rem">Thank you for reaching out to us.</h2>
+            <p class="lead">We will be contacting you shortly. You will automatically be redirected in a few moments.</p>
+
+
+        </div>
+
+    </section>
+
+
+
+
+{% endblock %}
+
+
+{% block scripts %}
+    {{ block.super }}
+    <script>
+        function redirect() {
+            window.location.href = "{% url 'landing_page' %}";
+        }
+        setTimeout(redirect, 3000); //2000 is equivalent to 2 seconds
+    </script>
+{% endblock %}

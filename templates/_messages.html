@@ -1,0 +1,28 @@
+{% for message in messages %}
+
+    <div class="modal fade" id="messageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content message {{ message.tags }}">
+
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                    {{ message }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+
+
+{% block extra_body %}
+    <script>
+        $(document).ready(function(){
+            $("#messageModal").modal('show');
+        });
+    </script>
+
+{% endblock %}
