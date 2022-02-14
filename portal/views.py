@@ -10,7 +10,6 @@ from .forms import ApplicationForm
 from job_applications.models import Job, Application
 
 import os
-import magic
 
 
 class JobsIndexView(LoginRequiredMixin, TemplateView):

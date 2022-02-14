@@ -83,12 +83,12 @@
                         {% endif %}
                     </td>
                     <td style="border-left:0; border-right:0; text-align: left; vertical-align: middle;">
-                        <a href="{% url 'job_application' application_pk=application.job.pk %}">
+                        <a href="{% url 'job_application' application_pk=application.pk %}">
                             Go to application
                         </a>
                     </td>
                     <td style="border-left:0; border-right:0; text-align: left; vertical-align: middle;">
-                        <a href="{% url 'take_on_application' application_pk=application.job.pk %}">
+                        <a href="{% url 'take_on_application' application_pk=application.pk %}">
                             Take on case
                         </a>
                     </td>
@@ -153,7 +153,7 @@
                         {% endif %}
                     </td>
                     <td style="border-left:0; border-right:0; text-align: left; vertical-align: middle;">
-                        <a href="{% url 'job_application' application_pk=application.job.pk %}">
+                        <a href="{% url 'job_application' application_pk=application.pk %}">
                             Go to application
                         </a>
                     </td>

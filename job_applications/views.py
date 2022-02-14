@@ -11,9 +11,9 @@ from job_applications.models import Job, Application
 from job_applications.utils import time_now_utc, create_deadline
 from recruiter_portal.models import Task
 from custom_user.models import User
+from django.utils.encoding import smart_str
 
 import os
-import magic
 from typing import List
 
 
@@ -163,8 +163,11 @@ def download_resume_view(request: HttpRequest, application_pk):
     """
 
     application = Application.objects.get(pk=application_pk)
-    resume_buffer = open(application.resume.path, "rb").read()
-    content_type = magic.from_buffer(resume_buffer, mime=True)
-    response = HttpResponse(resume_buffer, content_type=content_type);
-    response['Content-Disposition'] = 'attachment; filename="%s"' % os.path.basename(application.resume.path)
+    response = HttpResponse(
+        content_type='application/force-download')  # mimetype is replaced by content_type for django 1.7
+    response['Content-Disposition'] = 'attachment; filename=%s' % smart_str(application.resume.path)
+
+    response['X-Sendfile'] = smart_str(application.resume.path)
+    # It's usually a good idea to set the 'Content-Length' header too.
+    # You can also set any other required headers: Cache-Control, etc.
     return response

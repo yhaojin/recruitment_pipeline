@@ -82,7 +82,7 @@
                             <div>Resume</div>
                         </td>
                         <td>
-                            <div><a href="{% url 'download_resume' application_pk=application.pk %}">Download Resume</a>
+                            <div><a href="{{ application.resume.url }}">Download Resume</a>
                             </div>
                         </td>
                     </tr>
