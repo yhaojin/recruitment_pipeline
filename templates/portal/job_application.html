@@ -130,7 +130,7 @@
                                 <div>Contact at: {{ application.recruiter.email }}</div>
                             {% else %}
                                 {% if recruiter %}
-                                    <a href="{% url 'take_on_application' application_pk=application.job.pk %}">
+                                    <a href="{% url 'take_on_application' application_pk=application.pk %}">
                                         Take on case
                                     </a>
                                 {% endif %}
