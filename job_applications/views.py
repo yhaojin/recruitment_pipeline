@@ -113,6 +113,8 @@ class JobApplicationView(LoginRequiredMixin, TemplateView):
 
         ctx = super().get_context_data(**kwargs)
 
+        print("application", application.resume.url)
+
         ctx.update({"job": application.job, "application": application})
 
         # Recruiter will be able to see the specific user's application.
